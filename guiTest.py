@@ -1,12 +1,13 @@
 import tkinter as tk
+from tkinter import Text
 import subprocess
 import shlex
 
 # This function is called when the button is clicked.
 def run_other_script():
     # Get the text from the entry field.
-    input_text = entry_field.get()
-    
+    input_text = text_widget.get("1.0", "end-1c")
+    print(input_text)
     # Check if the text box is empty
     if not input_text:
         print("Error: The text box is empty.")
@@ -23,18 +24,27 @@ def run_other_script():
 
 def close_app():
     root.destroy()
+def close_app(event):
+    root.destroy()
+
+
+
 
 
 # Create the main window
 root = tk.Tk()
 root.title("Main GUI")
-root.geometry("900x300")
+root.geometry("900x900")
+
+root.bind("<Control-q>", close_app)
 
 # Create a label to instruct the user
-label = tk.Label(root, text="Enter a value to pass to the other script:")
+label = tk.Label(root, text="Describe the vibe")
 label.pack(pady=10)
 
-entry_field = tk.Entry(root, width=50)
+text_widget = Text(root, height=10)
+text_widget.pack(pady=5)
+entry_field = tk.Entry(root, width=50,)
 entry_field.pack(pady=5)
 
 # Create a button that calls the run_other_script function
